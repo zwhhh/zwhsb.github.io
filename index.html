@@ -1,18 +1,32 @@
 <html>
 <meta charset="UTF-8" /> 
 <body>
+<div align="center">
+<input type="button" value="开始游戏"  onClick="Start()"/>
+<input type="button" value="结束游戏"  onClick="End()"/>
+<br/>
+<span>通过键盘的上下左右键控制游戏角色移动，避开小怪物，如果碰到小怪物游戏就结束</span>
+<br/>
 <canvas id="gameCanvas" width="600" height="600">您的浏览器不支持Canvas</canvas>
+</div>
 <script type="text/javascript" >
+//定义结束监听事件
+	function End(){
+		location.reload();
+	}
+	//定义开始监听事件
+function Start(){
 //获取画布元素
 var canvas = document.getElementById("gameCanvas");
 var ctx = canvas.getContext("2d");
+var bgReady = false;
 
 //定义游戏场景
-var bgReady = false;
-var bgImage = new Image();
-bgImage.src = "bg.jpg";
-bgImage.onload = function(){
-	bgReady = true;
+  var bgReady = false;
+  var bgImage = new Image();
+  bgImage.src = "bg.jpg";
+  bgImage.onload = function(){
+  bgReady = true;
 }
 
 //定义mario对象样式
@@ -184,7 +198,19 @@ var main = function () {
 
 var then = Date.now();
 var start = then;
-timer = setInterval(main, 1); 
+timer = setInterval(main, 1);
+}
+Start();
+
+
+var End = function () {
+	//获取画布元素
+    var canvas = document.getElementById("gameCanvas");
+    var ctx = canvas.getContext("2d");
+	ctx.clearRect(0, 0, canvas.width, canvas.height);
+	window.clearInterval(timer);
+	return;
+}
 </script>
 </body>
 </html>
